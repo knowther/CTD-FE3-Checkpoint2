@@ -18,7 +18,7 @@ print de algumas implementações que fiz:
 
 <h2>alert snackbar caso o login esteja incorreto.</h2> 
 
-![](C:\Users\johnn\Documents\Prints app\login.png)
+![]([Prints app/login.png](https://raw.githubusercontent.com/knowther/CTD-FE3-Checkpoint2/main/Prints%20app/login.png))
 
 <h2>skeleton animation dos componentes da home</h2>
 
