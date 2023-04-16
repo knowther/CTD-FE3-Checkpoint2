@@ -18,30 +18,30 @@ print de algumas implementações que fiz:
 
 <h2>alert snackbar caso o login esteja incorreto.</h2> 
 
-![]([Prints app/login.png](https://raw.githubusercontent.com/knowther/CTD-FE3-Checkpoint2/main/Prints%20app/login.png))
+![](https://raw.githubusercontent.com/knowther/CTD-FE3-Checkpoint2/main/Prints%20app/login.png)
 
 <h2>skeleton animation dos componentes da home</h2>
 
-![](C:\Users\johnn\Documents\Prints app\skeleton.png)
+![](https://github.com/knowther/CTD-FE3-Checkpoint2/blob/main/Prints%20app/skeleton.png?raw=true)
 
-![](C:\Users\johnn\Documents\Prints app\skeleton-dark.png)
+![](https://github.com/knowther/CTD-FE3-Checkpoint2/blob/main/Prints%20app/skeleton-dark.png?raw=true)
 
 <h2>validação form com alert + snackbar</h2>
 
-![](C:\Users\johnn\Documents\Prints app\select.png)
+![](https://github.com/knowther/CTD-FE3-Checkpoint2/blob/main/Prints%20app/select.png?raw=true)
 
-![](C:\Users\johnn\Documents\Prints app\error.png)
+![](https://github.com/knowther/CTD-FE3-Checkpoint2/blob/main/Prints%20app/error.png?raw=true)
 
-![](C:\Users\johnn\Documents\Prints app\sucesso.png)
+![](https://github.com/knowther/CTD-FE3-Checkpoint2/blob/main/Prints%20app/sucesso.png?raw=true)
 
 
 
 <h2>Implementação modo dark</h2>
 
-![](C:\Users\johnn\Documents\Prints app\light-detail.png)
+![](https://github.com/knowther/CTD-FE3-Checkpoint2/blob/main/Prints%20app/light-detail.png?raw=true)
 
-![](C:\Users\johnn\Documents\Prints app\dark.png)
+![](https://github.com/knowther/CTD-FE3-Checkpoint2/blob/main/Prints%20app/dark.png?raw=true)
 
-![](C:\Users\johnn\Documents\Prints app\light-home.png)
+![](https://github.com/knowther/CTD-FE3-Checkpoint2/blob/main/Prints%20app/light-home.png?raw=true)
 
-![](C:\Users\johnn\Documents\Prints app\dark-home.png)
+![](https://github.com/knowther/CTD-FE3-Checkpoint2/blob/main/Prints%20app/dark-home.png?raw=true)
