@@ -1,47 +1,74 @@
 import styles from "./Form.module.css";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/auth-context";
-import api from "../services/api"
-import { useState} from "react";
+import api from "../services/api";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../contexts/theme-context";
+import { Snackbar, Alert } from "@mui/material";
 
 const LoginForm = () => {
   const { saveEmail, saveToken, setEstadoLogin } = useContext(AuthContext);
-  const {theme} = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
 
- 
+  const handleClick = () => {
+    setOpen(true);
+  };
 
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   async function logar() {
     try {
-      const response = await api.post("/auth",{ 
+      const response = await api.post("/auth", {
         username: email,
         password: password,
-    })
+      });
       console.log(response.data);
       saveEmail(email);
       saveToken(response.data.token);
       setEstadoLogin("Logout");
       navigate("/");
     } catch (error) {
-      alert("Erro ao logar");
+      setOpen(true)
     }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     logar();
-  }
+  };
   return (
     <>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleClose}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          Usuário ou senha incorretos, verifique.
+        </Alert>
+      </Snackbar>
       <div
-        className={`text-center ${theme == "dark" ? "dark" : ''} card container ${styles.card}`}
+        className={`text-center ${
+          theme == "dark" ? "dark" : ""
+        } card container ${styles.card}`}
       >
         <div className={`card-body ${styles.CardBody}`}>
           <form onSubmit={handleSubmit}>
