@@ -1,4 +1,4 @@
-import {useContext } from "react";
+import { useContext } from "react";
 import styles from "./Navbar.module.css";
 import { AuthContext } from "../contexts/auth-context";
 import { ThemeContext } from "../contexts/theme-context";
@@ -8,7 +8,6 @@ import { Button } from "bootstrap";
 const Navbar = () => {
   const { stsLogin, removeUserStorage } = useContext(AuthContext);
   const { theme, handleChangeTheme } = useContext(ThemeContext);
-
 
   return (
     <header className="sticky-top">
@@ -40,28 +39,23 @@ const Navbar = () => {
             <ul className="navbar-nav mb-2 mb-sm-0">
               <li className={`nav-item ${styles.navBarLink}`}>
                 {/* Ao clicar, o usuário deve ser redirecionado a home, com react-router */}
-                <Link className="nav-link" to={'/'}>Home</Link>
+                <Link className="nav-link" to={"/"}>
+                  Home
+                </Link>
               </li>
               <li className={`nav-item ${styles.navBarLink}`}>
+                {stsLogin == "Logout" ? (
+                  <Link
+                    className="nav-link"
+                    onClick={() => removeUserStorage()}
+                    to={"/login"}
+                  >
+                    {stsLogin}
+                  </Link>
+                ) : (
+                  <Link className="nav-link">{stsLogin}</Link>
+                )}
 
-
-                {
-                  stsLogin == "Logout" ? 
-                    <Link className="nav-link" onClick={() => removeUserStorage()} to={'/login'}>
-                   {
-                    stsLogin
-                   }
-    
-                </Link> : 
-                <Link className="nav-link" >
-                {
-                 stsLogin
-                }
- 
-             </Link>
-                }
-                
-                
                 {/* <a className="nav-link" href={stsLogin === "Login" ? "/login" : "/"}
                 onClick={() => {
                   if(stsLogin === "Logout") 
@@ -69,15 +63,15 @@ const Navbar = () => {
                   }}>
                   {stsLogin}
                 </a> */}
-              
-                
               </li>
               <li className={`nav-item`}>
-                <button onClick={handleChangeTheme}
-                  className={`btn btn-${theme == "dark" ? 'dark' : 'light'} ${styles.btnStyle
-                    }`}
+                <button
+                  onClick={handleChangeTheme}
+                  className={`btn btn-${theme == "dark" ? "light" : "dark"} ${
+                    styles.btnStyle
+                  }`}
                 >
-                  {theme == "dark" ? '☀' : '🌙' }
+                  {theme == "dark" ? "☀" : "🌙"}
                 </button>
               </li>
             </ul>
