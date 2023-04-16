@@ -27,6 +27,7 @@ const AuthProvider = ({ children }) => {
   function removeUserStorage() {
     localStorage.removeItem("ctd_email");
     localStorage.removeItem("ctd_token");
+    setStsLogin("Login");
   }
 
   function setEstadoLogin(login){

@@ -5,29 +5,22 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Detail from "./pages/detail";
+import "../src/index.css"
 import NotFound from "./pages/not-found";
 import { useContext } from "react";
 import { ThemeContext } from "./contexts/theme-context";
 
 function App() {
-  const { theme, handleChangeTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar a classe dark ou light */}
-      <div className={`{app ${theme}}`}>
+      <div className={`{app ${theme == "dark" ? "dark" : ""}}`}>
         <Navbar />
-        <main>
+        <main className={`${theme == "dark"? "dark" : ""}`}>
           <Outlet />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/detail/:matricula" element={<Detail />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
         </main>
         <Footer />
       </div>

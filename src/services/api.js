@@ -1,7 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://dhodonto.ctdprojetos.com.br",
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("ctd_token")}`,
+  },
+  baseURL: "https://dhodonto.ctdprojetos.com.br",
 });
 
 export default api;

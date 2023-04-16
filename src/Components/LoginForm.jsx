@@ -2,16 +2,21 @@ import styles from "./Form.module.css";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/auth-context";
 import api from "../services/api"
-import { useState } from "react";
+import { useState} from "react";
 import { useNavigate } from "react-router-dom";
+import { ThemeContext } from "../contexts/theme-context";
 
 const LoginForm = () => {
   const { saveEmail, saveToken, setEstadoLogin } = useContext(AuthContext);
+  const {theme} = useContext(ThemeContext)
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+
+ 
+
 
   async function logar() {
     try {
@@ -35,10 +40,8 @@ const LoginForm = () => {
   }
   return (
     <>
-      {/* //Na linha seguinte deverá ser feito um teste se a aplicação
-        // está em dark mode e deverá utilizar o css correto */}
       <div
-        className={`text-center card container ${styles.card}`}
+        className={`text-center ${theme == "dark" ? "dark" : ''} card container ${styles.card}`}
       >
         <div className={`card-body ${styles.CardBody}`}>
           <form onSubmit={handleSubmit}>

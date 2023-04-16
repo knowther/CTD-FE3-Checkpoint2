@@ -1,11 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Card.module.css";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { ThemeContext } from "../contexts/theme-context";
+
 
 //import {useState, useEffect} from 'react'
 
 const Card = (props) => {
   const {nome, sobrenome, usuario, matricula} = props.dados;
+  const { theme, handleChangeTheme } = useContext(ThemeContext);
 //  const {matricula, setMatricula} = useState("")
   const navigate = useNavigate()
   
@@ -31,7 +34,7 @@ useEffect(() => {
     <>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-      <div className={`card`}>
+      <div className={`card ${theme == "dark"? "dark" : ""}`}>
         <img
           className="card-img-top"
           src="/images/doctor.jpg"

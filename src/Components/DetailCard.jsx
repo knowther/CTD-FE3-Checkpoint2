@@ -1,54 +1,60 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import ScheduleFormModal from "./ScheduleFormModal";
 import styles from "./DetailCard.module.css";
 import { useParams } from "react-router-dom";
 import api from "../services/api";
+import { CircularProgress } from "@mui/material";
+import { ThemeContext } from "../contexts/theme-context";
 
 const DetailCard = () => {
   const { matricula } = useParams();
   const [dentista, setDentista] = useState({});
+  const { theme } = useContext(ThemeContext);
+  
   const [token, setToken] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  async function getDentista(){
+  async function getDentista() {
     const t = localStorage.getItem("ctd_token");
     setToken(t);
-    try{
-        const response = await api.get(`/dentista?matricula=${matricula}`, {
-          headers: {
-            'Authorization': `Bearer ${t}`
-          }});
-        const d = {
-          nome: response.data.nome,
-          sobrenome: response.data.sobrenome,
-          matricula: response.data.matricula,
-          email: response.data.usuario.username
-        }
-        setDentista(d);
-        console.log(d);
+    try {
+      const response = await api.get(`/dentista?matricula=${matricula}`, {
+        headers: {
+          Authorization: `Bearer ${t}`,
+        },
+      });
+      const d = {
+        nome: response.data.nome,
+        sobrenome: response.data.sobrenome,
+        matricula: response.data.matricula,
+        email: response.data.usuario.username,
+      };
+      setDentista(d);
+      setInterval(() => setIsLoaded(true), 2000 )
+     
     } catch (error) {
-        console.log(error);
-        alert("Erro ao tentar pegar dados do Dentista");
+      console.log(error);
+      alert("Erro ao tentar pegar dados do Dentista");
     }
   }
 
   useEffect(() => {
-    //Nesse useEffect, você vai fazer um fetch na api passando o 
+    //Nesse useEffect, você vai fazer um fetch na api passando o
     //id do dentista que está vindo do react-router e carregar os dados em algum estado
     getDentista();
-
   }, []);
 
   return (
-    //As instruções que estão com {''} precisam ser 
+    //As instruções que estão com {''} precisam ser
     //substituídas com as informações que vem da api
     <>
       <h1>Detail about Dentist {dentista.nome} </h1>
-      <section className="card col-sm-12 col-lg-6 container">
+      <section className={`card ${theme == "dark" ? "dark" : ""} col-sm-12 col-lg-6 container`}>
         {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-        <div
-          className={`card-body row`}
-        >
+        { !isLoaded ? 
+        <CircularProgress style={{margin: '0 auto'}}/> :
+          <div className={`card-body row`}>
           <div className="col-sm-12 col-lg-6">
             <img
               className="card-img-top"
@@ -62,9 +68,7 @@ const DetailCard = () => {
               <li className="list-group-item">
                 Sobrenome: {dentista.sobrenome}
               </li>
-              <li className="list-group-item">
-                Usuário: {dentista.email}
-              </li>
+              <li className="list-group-item">Usuário: {dentista.email}</li>
             </ul>
             <div className="text-center">
               {/* //Na linha seguinte deverá ser feito um teste se a aplicação
@@ -72,16 +76,18 @@ const DetailCard = () => {
               <button
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                className={`btn btn-light ${styles.button
-                  }`}
+                className={`btn btn-${theme == "dark" ? "dark": "light"} ${styles.button}`}
               >
                 Marcar consulta
               </button>
             </div>
           </div>
         </div>
+}
       </section>
-      <ScheduleFormModal />
+      <ScheduleFormModal dados={dentista} />
+        
+        
     </>
   );
 };
